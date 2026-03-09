@@ -20,6 +20,8 @@ interface SearchResult {
 }
 
 export default function SearchBar({ searchList }: Props) {
+  const withBase = (path: string) =>
+    `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
@@ -112,7 +114,7 @@ export default function SearchBar({ searchList }: Props) {
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
             <Card
-              href={`/posts/${item.slug}/`}
+              href={withBase(`posts/${item.slug}/`)}
               frontmatter={item.data}
               key={`${refIndex}-${item.slug}`}
             />

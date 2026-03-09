@@ -27,11 +27,15 @@ const {
 } = post.data;
 
 const { Content } = await post.render();
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const siteUrl =
+  Astro.site ?? new URL(`${Astro.url.origin}${import.meta.env.BASE_URL}`);
 const ogUrl = new URL(
-  ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
-  Astro.url.origin
+  ogImageUrl ?? withBase(`posts/${slugifyStr(title)}.png`),
+  siteUrl
 ).href;
 
 const layoutProps = {
@@ -56,7 +60,7 @@ const layoutProps = {
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
-      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+      onclick={`(() => (history.length === 1) ? window.location = '${withBase("/")}' : history.back())()`}
     >
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path

@@ -1,10 +1,18 @@
 ---
 // Remove current url path and remove trailing slash if exists
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
+const basePath = import.meta.env.BASE_URL.replace(/^\/+|\/+$/g, "");
+const pathWithoutBase =
+  basePath && currentUrlPath.startsWith(`/${basePath}`)
+    ? currentUrlPath.slice(basePath.length + 1) || "/"
+    : currentUrlPath;
 
 // Get url array from path
 // eg: /tags/tailwindcss => ['tags', 'tailwindcss']
-const breadcrumbList = currentUrlPath.split("/").slice(1);
+const breadcrumbList = pathWithoutBase.split("/").slice(1);
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
@@ -27,7 +35,7 @@ breadcrumbList[0] === "tags" &&
 <nav class="breadcrumb" aria-label="breadcrumb">
   <ul>
     <li>
-      <a href="/">Home</a>
+      <a href={withBase("/")}>Home</a>
       <span aria-hidden="true">&raquo;</span>
     </li>
     {
@@ -44,7 +52,7 @@ breadcrumbList[0] === "tags" &&
           </li>
         ) : (
           <li>
-            <a href={`/${breadcrumb}/`}>{breadcrumb}</a>
+            <a href={withBase(`${breadcrumb}/`)}>{breadcrumb}</a>
             <span aria-hidden="true">&raquo;</span>
           </li>
         )
