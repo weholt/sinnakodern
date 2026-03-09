@@ -3,7 +3,7 @@ import type { Site, SocialObjects } from "./types";
 export const SITE: Site = {
   website: "https://weholt.github.io/sinnakodern/", // replace this with your deployed domain
   author: "Thomas Augestad Weholt",
-  desc: "Weholt Development Labs — notes, resume, licensing thoughts and project archive.",
+  desc: "SinnaKodern — notes, resume, tags, and a project archive.",
   title: "SinnaKodern",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,

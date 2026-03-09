@@ -24,17 +24,15 @@ const archivePosts = sortedPosts.slice(0, 10);
       <h1>SinnaKodern</h1>
       <p>
         Welcome. This site contains my development notes, personal resumé/story,
-        thoughts on software licensing, and a running archive of projects.
+        topic-based browsing through tags, and a running archive of projects.
       </p>
       <p>
-        Start with the resumé page, then head into licensing notes or the TIL
+        Start with the resumé page, then head into the tags overview or the TIL
         section when you want some technical rabbit holes.
       </p>
       <div class="cta-grid">
         <LinkButton href={withBase("resume/")}>The Story / Resumé</LinkButton>
-        <LinkButton href={withBase("licensing/")}
-          >Thoughts on Licensing</LinkButton
-        >
+        <LinkButton href={withBase("tags/")}>Browse by Tag</LinkButton>
         <LinkButton href={withBase("til/")}>Today I Learned</LinkButton>
         <LinkButton href={withBase("posts/")}>Archive</LinkButton>
       </div>
@@ -85,7 +83,7 @@ const archivePosts = sortedPosts.slice(0, 10);
     @apply pb-6 pt-8;
   }
   #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+    @apply font-display my-4 inline-block text-4xl font-bold tracking-tight sm:my-8 sm:text-6xl;
   }
   #hero p {
     @apply my-2;
@@ -104,6 +102,6 @@ const archivePosts = sortedPosts.slice(0, 10);
     @apply mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between;
   }
   .section-header h2 {
-    @apply text-2xl font-semibold;
+    @apply font-display text-2xl font-semibold tracking-tight;
   }
 </style>

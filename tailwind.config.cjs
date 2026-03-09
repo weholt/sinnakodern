@@ -54,6 +54,7 @@ module.exports = {
         transparent: "transparent",
       },
       fontFamily: {
+        display: ["Newsreader", "Georgia", "serif"],
         mono: [
           "JetBrainsMono Nerd Font",
           "JetBrainsMono Nerd Font Mono",
