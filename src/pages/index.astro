@@ -1,12 +1,20 @@
 ---
+import { getCollection } from "astro:content";
+import Card from "@components/Card";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
+import getSortedPosts from "@utils/getSortedPosts";
 
 const withBase = (path: string) =>
   `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
+const posts = await getCollection("blog");
+const sortedPosts = getSortedPosts(posts);
+const featuredPost = sortedPosts[0];
+const archivePosts = sortedPosts.slice(0, 10);
 ---
 
 <Layout>
@@ -32,6 +40,40 @@ const withBase = (path: string) =>
       </div>
     </section>
     <Hr />
+
+    {
+      featuredPost && (
+        <section id="featured-article">
+          <p class="section-label">Featured article</p>
+          <ul>
+            <Card
+              href={withBase(`posts/${featuredPost.slug}/`)}
+              frontmatter={featuredPost.data}
+              secHeading={false}
+            />
+          </ul>
+        </section>
+      )
+    }
+
+    <Hr />
+
+    <section id="archive-preview">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Archive</p>
+          <h2>Latest articles</h2>
+        </div>
+        <LinkButton href={withBase("posts/")}>See all archive</LinkButton>
+      </div>
+      <ul>
+        {
+          archivePosts.map(({ data, slug }) => (
+            <Card href={withBase(`posts/${slug}/`)} frontmatter={data} />
+          ))
+        }
+      </ul>
+    </section>
   </main>
 
   <Footer />
@@ -50,5 +92,18 @@ const withBase = (path: string) =>
   }
   .cta-grid {
     @apply mt-8 grid gap-3 sm:grid-cols-2;
+  }
+  #featured-article,
+  #archive-preview {
+    @apply py-8;
+  }
+  .section-label {
+    @apply mb-2 text-sm uppercase tracking-[0.2em] text-skin-accent opacity-80;
+  }
+  .section-header {
+    @apply mb-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between;
+  }
+  .section-header h2 {
+    @apply text-2xl font-semibold;
   }
 </style>
