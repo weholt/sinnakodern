@@ -21,21 +21,13 @@ const archivePosts = sortedPosts.slice(0, 10);
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>SinnaKodern</h1>
-      <p>
-        Welcome. This site contains my development notes, personal resumé/story,
-        topic-based browsing through tags, and a running archive of projects.
-      </p>
-      <p>
-        Start with the resumé page, then head into the tags overview or the TIL
-        section when you want some technical rabbit holes.
-      </p>
-      <div class="cta-grid">
-        <LinkButton href={withBase("resume/")}>The Story / Resumé</LinkButton>
-        <LinkButton href={withBase("tags/")}>Browse by Tag</LinkButton>
-        <LinkButton href={withBase("til/")}>Today I Learned</LinkButton>
-        <LinkButton href={withBase("posts/")}>Archive</LinkButton>
-      </div>
+      <img
+        src={withBase("assets/logo.png")}
+        alt="SinnaKodern"
+        class="hero-logo"
+        width="1170"
+        height="768"
+      />
     </section>
     <Hr />
 
@@ -80,16 +72,10 @@ const archivePosts = sortedPosts.slice(0, 10);
 <style>
   /* ===== Hero Section ===== */
   #hero {
-    @apply pb-6 pt-8;
+    @apply flex justify-center pb-6 pt-8;
   }
-  #hero h1 {
-    @apply font-display my-4 inline-block text-4xl font-bold tracking-tight sm:my-8 sm:text-6xl;
-  }
-  #hero p {
-    @apply my-2;
-  }
-  .cta-grid {
-    @apply mt-8 grid gap-3 sm:grid-cols-2;
+  .hero-logo {
+    @apply h-auto w-full max-w-3xl;
   }
   #featured-article,
   #archive-preview {
