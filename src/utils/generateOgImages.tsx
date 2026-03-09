@@ -7,13 +7,13 @@ import siteOgImage from "./og-templates/site";
 const fetchFonts = async () => {
   // Regular Font
   const fontFileRegular = await fetch(
-    "https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@v3.4.0/patched-fonts/JetBrainsMono/Regular/JetBrainsMonoNerdFont-Regular.ttf"
+    "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf"
   );
   const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
   // Bold Font
   const fontFileBold = await fetch(
-    "https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@v3.4.0/patched-fonts/JetBrainsMono/Bold/JetBrainsMonoNerdFont-Bold.ttf"
+    "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Bold.ttf"
   );
   const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
 
