@@ -28,7 +28,7 @@ const withBase = (path: string) =>
               height={LOGO_IMAGE.height}
             />
           ) : (
-            SITE.title
+            <span class="logo-badge">{SITE.title}</span>
           )
         }
       </a>
@@ -137,10 +137,13 @@ const withBase = (path: string) =>
     @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
   }
   .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
+    @apply relative flex w-full items-start justify-between px-4 pb-2 pt-4 sm:items-center sm:pb-4 sm:pt-8;
   }
   .logo {
-    @apply font-display absolute py-1 text-2xl font-bold tracking-tight sm:static sm:text-3xl;
+    @apply absolute py-1 sm:static;
+  }
+  .logo-badge {
+    @apply inline-block bg-skin-accent px-3 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-skin-inverted;
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;
