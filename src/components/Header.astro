@@ -28,7 +28,12 @@ const withBase = (path: string) =>
               height={LOGO_IMAGE.height}
             />
           ) : (
-            <span class="logo-badge">{SITE.title}</span>
+            <span class="logo-badge" aria-label={SITE.title}>
+              <>
+                <span class="logo-emphasis">SINNA</span>
+                <span class="logo-rest">KODERN</span>
+              </>
+            </span>
           )
         }
       </a>
@@ -143,7 +148,13 @@ const withBase = (path: string) =>
     @apply absolute py-1 sm:static;
   }
   .logo-badge {
-    @apply inline-block bg-skin-accent px-3 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-skin-inverted;
+    @apply inline-block bg-skin-accent px-3 py-2 text-base uppercase tracking-[0.32em] text-skin-inverted;
+  }
+  .logo-emphasis {
+    @apply font-bold;
+  }
+  .logo-rest {
+    @apply font-normal;
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;
