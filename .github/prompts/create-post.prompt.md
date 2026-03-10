@@ -33,8 +33,9 @@ Requirements:
 9. If `project` is provided, store it in frontmatter as the project slug. Omit the field when no project is provided.
 10. Set `draft` and `featured` from input when provided; otherwise default both to `false`.
 11. Put the provided `text` below the frontmatter and format it as clean Markdown.
-12. Do not add an H1 heading in the body if it duplicates the title; start body headings at H2 or lower.
-13. Do not overwrite an existing file. If the slug already exists, append a short numeric suffix to the filename and `slug`.
+12. When using fenced code blocks, wrap or split long examples across multiple lines when a single line becomes too long to read comfortably.
+13. Do not add an H1 heading in the body if it duplicates the title; start body headings at H2 or lower.
+14. Do not overwrite an existing file. If the slug already exists, append a short numeric suffix to the filename and `slug`.
 
 Output expectations:
 
