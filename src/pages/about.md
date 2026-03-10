@@ -3,34 +3,33 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+SinnaKodern is my personal engineering notebook.
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+It is where I collect working notes, longer write-ups, field reports from real projects, and the occasional opinion about tools, software, and open source.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+The site started life as a customized AstroPaper install, but the goal now is much simpler: make it unmistakably mine.
 
-<div>
-  <img src="../assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+## What you'll find here
 
-## Tech Stack
+- Python and Django notes
+- TIL-style entries on tooling and debugging
+- thoughts on free software, maintenance, and sustainability
+- posts about the projects I ship, break, fix, and eventually understand
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+## Why the site exists
 
-## Features
+I wanted a place that feels closer to a workshop log than a polished portfolio brochure.
 
-Here are certain features of this site.
+Resume pages are useful. So are archives, tags, and search. But the real point is to build up a body of notes that reflects how I actually work: practical, opinionated, iterative, and usually one terminal window away from chaos.
 
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
+## Current themes
 
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+Right now the site revolves mostly around:
+
+- Python
+- Django
+- tooling and developer workflow
+- backend-heavy engineering
+- open source and maintainability
+
+If that sounds like your corner of the internet too, you’ll probably feel at home here.

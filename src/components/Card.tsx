@@ -2,9 +2,13 @@ import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 
+type CardFrontmatter =
+  | CollectionEntry<"blog">["data"]
+  | CollectionEntry<"projects">["data"];
+
 export interface Props {
   href?: string;
-  frontmatter: CollectionEntry<"blog">["data"];
+  frontmatter: CardFrontmatter;
   secHeading?: boolean;
 }
 

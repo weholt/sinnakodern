@@ -7,13 +7,19 @@ import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import getSortedPosts from "@utils/getSortedPosts";
+import getSortedProjects from "@utils/getSortedProjects";
 
 const withBase = (path: string) =>
   `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
 
 const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
-const featuredPost = sortedPosts[0];
+const featuredPost = sortedPosts.find(post => post.data.featured);
+
+const projects = await getCollection("projects");
+const sortedProjects = getSortedProjects(projects);
+const featuredProject = sortedProjects.find(project => project.data.featured);
+
 const archivePosts = sortedPosts.slice(0, 10);
 ---
 
@@ -22,7 +28,7 @@ const archivePosts = sortedPosts.slice(0, 10);
   <main id="main-content">
     <section id="hero">
       <img
-        src={withBase("assets/logo.png")}
+        src="assets/logo.png"
         alt="SinnaKodern"
         class="hero-logo"
         width="1170"
@@ -32,15 +38,24 @@ const archivePosts = sortedPosts.slice(0, 10);
     <Hr />
 
     {
-      featuredPost && (
-        <section id="featured-article">
-          <p class="section-label">Featured article</p>
+      (featuredPost || featuredProject) && (
+        <section id="featured-content">
+          <p class="section-label">Featured</p>
           <ul>
-            <Card
-              href={withBase(`posts/${featuredPost.slug}/`)}
-              frontmatter={featuredPost.data}
-              secHeading={false}
-            />
+            {featuredPost && (
+              <Card
+                href={withBase(`posts/${featuredPost.slug}/`)}
+                frontmatter={featuredPost.data}
+                secHeading={false}
+              />
+            )}
+            {featuredProject && (
+              <Card
+                href={withBase(`projects/${featuredProject.slug}/`)}
+                frontmatter={featuredProject.data}
+                secHeading={false}
+              />
+            )}
           </ul>
         </section>
       )
@@ -77,7 +92,7 @@ const archivePosts = sortedPosts.slice(0, 10);
   .hero-logo {
     @apply h-auto w-full max-w-3xl;
   }
-  #featured-article,
+  #featured-content,
   #archive-preview {
     @apply py-8;
   }

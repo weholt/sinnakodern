@@ -21,7 +21,10 @@ const withBase = (path: string) =>
 
 <Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Main
+    pageTitle="Posts"
+    pageDesc="A running archive of notes, essays, and technical write-ups from the SinnaKodern notebook."
+  >
     <ul>
       {
         paginatedPosts.map(({ data, slug }) => (

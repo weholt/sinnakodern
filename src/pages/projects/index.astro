@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
+import { SITE } from "@config";
+import getSortedProjects from "@utils/getSortedProjects";
+import { slugifyStr } from "@utils/slugify";
+
+const projects = await getCollection("projects");
+const sortedProjects = getSortedProjects(projects);
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+---
+
+<Layout title={`Projects | ${SITE.title}`}>
+  <Header activeNav="projects" />
+  <Main
+    pageTitle="Projects"
+    pageDesc="Project pages, build notes, and longer write-ups tied to the things I’m actually working on."
+  >
+    {
+      sortedProjects.length > 0 ? (
+        <ul class="project-list">
+          {sortedProjects.map(project => (
+            <li class="project-card">
+              <div class="project-card-head">
+                <div>
+                  <p class="status-chip">{project.data.status}</p>
+                  <h2>
+                    <a href={withBase(`projects/${project.slug}/`)}>
+                      {project.data.title}
+                    </a>
+                  </h2>
+                </div>
+                <Datetime
+                  pubDatetime={project.data.pubDatetime}
+                  modDatetime={project.data.modDatetime}
+                />
+              </div>
+
+              <p>{project.data.description}</p>
+
+              <ul class="tag-row">
+                {project.data.tags.map(tag => (
+                  <Tag tag={slugifyStr(tag)} />
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty-state">
+          <p>
+            No project pages yet — this section is ready when the first one
+            lands.
+          </p>
+        </div>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>
+
+<style>
+  .project-list {
+    @apply grid gap-6;
+  }
+
+  .project-card {
+    @apply rounded-lg border border-skin-line bg-skin-card bg-opacity-30 p-5;
+  }
+
+  .project-card-head {
+    @apply mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between;
+  }
+
+  .project-card h2 {
+    @apply mt-2 font-display text-2xl font-semibold tracking-tight;
+  }
+
+  .project-card h2 a {
+    @apply hover:text-skin-accent;
+  }
+
+  .status-chip {
+    @apply inline-block bg-skin-card-muted px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-skin-accent;
+  }
+
+  .project-card p {
+    @apply mb-4;
+  }
+
+  .tag-row {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .empty-state {
+    @apply rounded-lg border border-dashed border-skin-line p-6 italic;
+  }
+</style>

@@ -1,17 +1,16 @@
 ---
-author: "Sat Naing "
-title: Adding new posts in AstroPaper theme
-slug: adding-new-posts-in-astropaper-theme
-featured: true
-draft: false
+author: Thomas Augestad Weholt
+title: Writing for SinnaKodern
+slug: writing-for-sinnakodern
+featured: false
+draft: true
 tags:
   - docs
-description: Some rules & recommendations for creating or adding new posts using
-  AstroPaper theme.
+description: Editorial notes and practical rules for writing posts on SinnaKodern.
 pubDatetime: 2024-06-01T12:00:00Z
 ---
 
-Here are some rules/recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
+This is the working note I use when I add a new post to SinnaKodern.
 
 ## Table of contents
 
@@ -39,7 +38,7 @@ Here is the list of frontmatter property for each post.
 
 Only `title`, `description` and `pubDatetime` fields in frontmatter must be specified.
 
-Title and description (excerpt) are important for search engine optimization (SEO) and thus AstroPaper encourages to include these in blog posts.
+Title and description matter because they make the archive clearer, improve searchability, and force me to decide what the post is actually about.
 
 `slug` is the unique identifier of the url. Thus, `slug` must be unique and different from other posts. The whitespace of `slug` should to be separated with `-` or `_` but `-` is recommended. Slug is automatically generated using the blog post file name. However, you can define your `slug` as a frontmatter in your blog post.
 
@@ -65,7 +64,7 @@ Here is the sample frontmatter for a post.
 # src/content/blog/sample-post.md
 ---
 title: The title of the post
-author: your name
+author: Thomas Augestad Weholt
 pubDatetime: 2022-09-21T05:17:19Z
 slug: the-title-of-the-post
 featured: true
@@ -75,10 +74,21 @@ tags:
   - example
   - tags
 ogImage: ""
-description: This is the example description of the example post.
+description: One or two sentences explaining why the post exists.
 canonicalURL: https://example.org/my-article-was-already-posted-here
 ---
 ```
+
+## Editorial direction
+
+Before publishing, I want each post to answer at least one of these questions:
+
+- Did I learn something worth keeping?
+- Did I solve a real problem?
+- Did I form an opinion worth defending?
+- Would future-me be happy that I wrote this down?
+
+If the answer is “not really”, it probably belongs in a scratchpad instead of the public archive.
 
 ## Adding table of contents
 
@@ -93,7 +103,7 @@ For instance, if you want to place your table of contents just under the intro p
 # some frontmatter
 ---
 
-Here are some recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
+Here are some recommendations, tips & tricks for creating a new post on SinnaKodern.
 
 ## Table of contents
 
@@ -102,7 +112,7 @@ Here are some recommendations, tips & ticks for creating new posts in AstroPaper
 
 ## Headings
 
-There's one thing to note about headings. The AstroPaper blog posts use title (title in the frontmatter) as the main heading of the post. Therefore, the rest of the heading in the post should be using h2 ~ h6.
+There's one thing to note about headings. The title in the frontmatter becomes the main heading of the post. That means the rest of the article should start at h2 and move downward from there.
 
 This rule is not mandatory, but highly recommended for visual, accessibility and SEO purposes.
 
@@ -163,6 +173,15 @@ My recommendation for image compression sites.
 
 ### OG Image
 
-The default OG image will be placed if a post does not specify the OG image. Though not required, OG image related to the post should be specify in the frontmatter. The recommended size for OG image is **_1200 X 640_** px.
+The default OG image will be used if a post does not specify one. It is usually enough to rely on the default, but if a post needs a stronger visual identity, add a dedicated OG image in the frontmatter. Recommended size is **_1200 X 640_** px.
 
-> Since AstroPaper v1.4.0, OG images will be generated automatically if not specified. Check out [the announcement](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/).
+## Tone check before publishing
+
+My preferred tone is:
+
+- practical over clever
+- specific over generic
+- opinionated without becoming theatrical
+- technical, but still readable by a tired human at the end of a workday
+
+If a post sounds like marketing copy or template filler, it probably needs another pass.

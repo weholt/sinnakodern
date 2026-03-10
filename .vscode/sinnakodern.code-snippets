@@ -1,0 +1,35 @@
+{
+  "SinnaKodern Frontmatter": {
+    "scope": "markdown",
+    "prefix": "frontmatter",
+    "body": [
+      "---",
+      "author: Thomas Augestad Weholt",
+      "pubDatetime: $CURRENT_YEAR-$CURRENT_MONTH-${CURRENT_DATE}T$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND.000$CURRENT_TIMEZONE_OFFSET",
+      "modDatetime: $1",
+      "title: $2",
+      "slug: $3",
+      "featured: ${4|false,true|}",
+      "draft: ${5|true,false|}",
+      "tags:",
+      "  - $6",
+      "description: $7",
+      "---"
+    ],
+    "description": "Adds frontmatter for a SinnaKodern blog post"
+  },
+  "SinnaKodern Blog Template": {
+    "scope": "markdown",
+    "prefix": "template",
+    "body": [
+      "${1:frontmatter}",
+      "",
+      "${2: Introductory Sentence}",
+      "",
+      "## Table of contents",
+      "",
+      "## ${3: heading 1}"
+    ],
+    "description": "Adds a starter template for a SinnaKodern blog post. Trigger the frontmatter snippet on the first line if needed."
+  }
+}

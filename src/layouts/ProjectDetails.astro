@@ -1,0 +1,131 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
+import LinkButton from "@components/LinkButton.astro";
+import { slugifyStr } from "@utils/slugify";
+import { SITE } from "@config";
+
+export interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const {
+  title,
+  description,
+  pubDatetime,
+  modDatetime,
+  tags,
+  status,
+  repoUrl,
+  liveUrl,
+} = project.data;
+
+const withBase = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+---
+
+<Layout
+  title={`${title} | Projects | ${SITE.title}`}
+  description={description}
+  pubDatetime={pubDatetime}
+  modDatetime={modDatetime}
+  scrollSmooth={true}
+>
+  <Header activeNav="projects" />
+
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+      onclick={`(() => (history.length === 1) ? window.location = '${withBase("projects/")}' : history.back())()`}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg><span>Back to Projects</span>
+    </button>
+  </div>
+
+  <main id="main-content">
+    <div class="project-header">
+      <p class="status-chip">{status}</p>
+      <h1 transition:name={slugifyStr(title)} class="project-title">{title}</h1>
+      <p class="project-description">{description}</p>
+      <Datetime
+        pubDatetime={pubDatetime}
+        modDatetime={modDatetime}
+        size="lg"
+        className="my-2"
+      />
+    </div>
+
+    <div class="project-links">
+      {
+        liveUrl && (
+          <LinkButton
+            href={liveUrl}
+            className="focus-outline"
+            ariaLabel={`Open ${title}`}
+            title="Live site"
+          >
+            Live site
+          </LinkButton>
+        )
+      }
+      {
+        repoUrl && (
+          <LinkButton
+            href={repoUrl}
+            className="focus-outline"
+            ariaLabel={`Open repository for ${title}`}
+            title="Repository"
+          >
+            Repository
+          </LinkButton>
+        )
+      }
+    </div>
+
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+      <Content />
+    </article>
+
+    <ul class="my-8 flex flex-wrap gap-2">
+      {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
+    </ul>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full max-w-3xl px-4 pb-12;
+  }
+
+  .project-header {
+    @apply space-y-2;
+  }
+
+  .status-chip {
+    @apply inline-block bg-skin-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-skin-accent;
+  }
+
+  .project-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-skin-accent sm:text-4xl;
+  }
+
+  .project-description {
+    @apply mt-2 text-lg italic text-skin-base;
+  }
+
+  .project-links {
+    @apply mt-6 flex flex-wrap gap-3;
+  }
+</style>
