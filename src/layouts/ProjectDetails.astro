@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -8,6 +9,8 @@ import Datetime from "@components/Datetime";
 import LinkButton from "@components/LinkButton.astro";
 import { slugifyStr } from "@utils/slugify";
 import { SITE } from "@config";
+import getSortedPosts from "@utils/getSortedPosts";
+import postFilter from "@utils/postFilter";
 
 export interface Props {
   project: CollectionEntry<"projects">;
@@ -15,6 +18,11 @@ export interface Props {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const relatedPosts = getSortedPosts(
+  (await getCollection("blog", postFilter)).filter(
+    post => post.data.project === project.slug
+  )
+);
 
 const {
   title,
@@ -97,6 +105,33 @@ const withBase = (path: string) =>
       <Content />
     </article>
 
+    {
+      relatedPosts.length > 0 && (
+        <aside class="appendix mt-12">
+          <h2 class="appendix-title">Appendix: related posts</h2>
+          <ul class="appendix-list">
+            {relatedPosts.map(post => (
+              <li class="appendix-item">
+                <a href={withBase(`posts/${post.slug}/`)} class="appendix-link">
+                  <span class="appendix-link-title">{post.data.title}</span>
+                  <span class="appendix-link-meta">
+                    <Datetime
+                      pubDatetime={post.data.pubDatetime}
+                      modDatetime={post.data.modDatetime}
+                      className="my-0"
+                    />
+                  </span>
+                  <span class="appendix-link-description">
+                    {post.data.description}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+
     <ul class="my-8 flex flex-wrap gap-2">
       {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
     </ul>
@@ -127,5 +162,37 @@ const withBase = (path: string) =>
 
   .project-links {
     @apply mt-6 flex flex-wrap gap-3;
+  }
+
+  .appendix {
+    @apply rounded-lg border border-skin-line bg-skin-card bg-opacity-30 p-6;
+  }
+
+  .appendix-title {
+    @apply font-display text-2xl font-semibold tracking-tight text-skin-accent;
+  }
+
+  .appendix-list {
+    @apply mt-6 space-y-4;
+  }
+
+  .appendix-item {
+    @apply list-none;
+  }
+
+  .appendix-link {
+    @apply block rounded-md border border-transparent px-3 py-3 no-underline transition hover:border-skin-line hover:bg-skin-fill;
+  }
+
+  .appendix-link-title {
+    @apply block font-medium text-skin-accent;
+  }
+
+  .appendix-link-meta {
+    @apply mt-1 block text-sm opacity-80;
+  }
+
+  .appendix-link-description {
+    @apply mt-2 block text-sm;
   }
 </style>

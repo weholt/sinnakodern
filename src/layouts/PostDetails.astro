@@ -5,6 +5,7 @@ import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
@@ -24,11 +25,17 @@ const {
   pubDatetime,
   modDatetime,
   tags,
+  project: projectSlug,
 } = post.data;
 
 const { Content } = await post.render();
 const withBase = (path: string) =>
   `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
+const projects = await getCollection("projects", ({ data }) => !data.draft);
+const project = projectSlug
+  ? projects.find(entry => entry.slug === projectSlug)
+  : undefined;
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const siteUrl =
@@ -70,6 +77,18 @@ const layoutProps = {
     </button>
   </div>
   <main id="main-content">
+    {
+      project && (
+        <a
+          href={withBase(`projects/${project.slug}/`)}
+          class="project-link-banner"
+        >
+          <span class="project-link-label">Project</span>
+          <span class="project-link-title">{project.data.title}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
     <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
     <Datetime
       pubDatetime={pubDatetime}
@@ -112,6 +131,18 @@ const layoutProps = {
   }
   .post-title {
     @apply font-display text-3xl font-semibold tracking-tight text-skin-accent sm:text-4xl;
+  }
+
+  .project-link-banner {
+    @apply mb-5 inline-flex items-center gap-2 rounded-md border border-skin-line bg-skin-card px-3 py-2 text-sm no-underline transition hover:border-skin-accent hover:text-skin-accent;
+  }
+
+  .project-link-label {
+    @apply text-xs font-semibold uppercase tracking-[0.22em] opacity-70;
+  }
+
+  .project-link-title {
+    @apply font-medium;
   }
 </style>
 

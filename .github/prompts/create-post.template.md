@@ -2,6 +2,7 @@
 title: "{{TITLE}}"
 author: "{{AUTHOR}}"
 slug: "{{SLUG}}"
+project: "{{PROJECT}}"
 featured: { { FEATURED } }
 draft: { { DRAFT } }
 tags:

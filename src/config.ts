@@ -42,4 +42,10 @@ export const SOCIALS: SocialObjects = [
     linkTitle: `${SITE.title} on Instagram`,
     active: true,
   },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@sinnakodern",
+    linkTitle: `${SITE.title} on YouTube`,
+    active: true,
+  },
 ];
