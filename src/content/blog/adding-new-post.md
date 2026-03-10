@@ -1,6 +1,6 @@
 ---
-author: "Sat Naing "
-title: Adding new posts in AstroPaper theme
+author: Thomas Weholt
+title: Slopping your ding-dong on the table
 slug: adding-new-posts-in-astropaper-theme
 featured: true
 draft: false
@@ -8,9 +8,7 @@ tags:
   - docs
 description: Some rules & recommendations for creating or adding new posts using
   AstroPaper theme.
-pubDatetime: 2024-06-01T12:00:00Z
 ---
-
 Here are some rules/recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
 
 ## Table of contents
@@ -21,19 +19,19 @@ Frontmatter is the main place to store some important information about the blog
 
 Here is the list of frontmatter property for each post.
 
-| Property           | Description                                                                                 | Remark                                        |
-| ------------------ | ------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **_title_**        | Title of the post. (h1)                                                                     | required\*                                    |
-| **_description_**  | Description of the post. Used in post excerpt and site description of the post.             | required\*                                    |
-| **_pubDatetime_**  | Published datetime in ISO 8601 format.                                                      | required\*                                    |
-| **_modDatetime_**  | Modified datetime in ISO 8601 format. (only add this property when a blog post is modified) | optional                                      |
-| **_author_**       | Author of the post.                                                                         | default = SITE.author                         |
-| **_slug_**         | Slug for the post. This field is optional but cannot be an empty string. (slug: ""❌)       | default = slugified file name                 |
-| **_featured_**     | Whether or not display this post in featured section of home page                           | default = false                               |
-| **_draft_**        | Mark this post 'unpublished'.                                                               | default = false                               |
-| **_tags_**         | Related keywords for this post. Written in array yaml format.                               | default = others                              |
-| **_ogImage_**      | OG image of the post. Useful for social media sharing and SEO.                              | default = SITE.ogImage or generated OG image  |
-| **_canonicalURL_** | Canonical URL (absolute), in case the article already exists on other source.               | default = `Astro.site` + `Astro.url.pathname` |
+| Property | Description | Remark |
+| --- | --- | --- |
+| **_title_** | Title of the post. (h1) | required\* |
+| **_description_** | Description of the post. Used in post excerpt and site description of the post. | required\* |
+| **_pubDatetime_** | Published datetime in ISO 8601 format. | required\* |
+| **_modDatetime_** | Modified datetime in ISO 8601 format. (only add this property when a blog post is modified) | optional |
+| **_author_** | Author of the post. | default = SITE.author |
+| **_slug_** | Slug for the post. This field is optional but cannot be an empty string. (slug: ""❌) | default = slugified file name |
+| **_featured_** | Whether or not display this post in featured section of home page | default = false |
+| **_draft_** | Mark this post 'unpublished'. | default = false |
+| **_tags_** | Related keywords for this post. Written in array yaml format. | default = others |
+| **_ogImage_** | OG image of the post. Useful for social media sharing and SEO. | default = SITE.ogImage or generated OG image |
+| **_canonicalURL_** | Canonical URL (absolute), in case the article already exists on other source. | default = `Astro.site` + `Astro.url.pathname` |
 
 > Tip! You can get ISO 8601 datetime by running `new Date().toISOString()` in the console. Make sure you remove quotes though.
 
@@ -158,8 +156,8 @@ When you put images in the blog post (especially for images under `public` direc
 
 My recommendation for image compression sites.
 
-- [TinyPng](https://tinypng.com/)
-- [TinyJPG](https://tinyjpg.com/)
+*   [TinyPng](https://tinypng.com/)
+*   [TinyJPG](https://tinyjpg.com/)
 
 ### OG Image
 
